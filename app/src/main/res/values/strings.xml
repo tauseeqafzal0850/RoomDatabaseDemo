@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RoomDatabase</string>
+    <string name="insert_data">Insert Data</string>
+    <string name="show_data">Show Data</string>
+    <string name="user_registeration">User Registeration</string>
+    <string name="full_name">Full Name</string>
+    <string name="employee_id">Employee ID</string>
+    <string name="age">Age</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+</resources>
