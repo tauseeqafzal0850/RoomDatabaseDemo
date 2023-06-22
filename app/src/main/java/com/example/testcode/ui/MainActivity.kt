@@ -34,17 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleEventListener() {
         binding.btnInsertData.setOnClickListener {
-            if (binding.editTextFullName.text!!.isEmpty()) {
-                Toast.makeText(this, "Enter Full Name", Toast.LENGTH_SHORT).show()
-            } else if (binding.editTextEmployeeId.text!!.isEmpty()) {
-                Toast.makeText(this, "Enter Employee ID", Toast.LENGTH_SHORT).show()
-            } else if (binding.editTextAddress.text!!.isEmpty()) {
-                Toast.makeText(this, "Enter Full Address", Toast.LENGTH_SHORT).show()
-            } else if (binding.editTextPhoneNumber.text!!.isEmpty()) {
-                Toast.makeText(this, "Enter Phone Number", Toast.LENGTH_SHORT).show()
-            } else if (binding.editTextAge.text!!.isEmpty()) {
-                Toast.makeText(this, "Enter Your Age", Toast.LENGTH_SHORT).show()
-            } else {
+            if (validateFields())
+            {
                 mViewModel.getSpecificUser(binding.editTextEmployeeId.text.toString())?.let {
                     Toast.makeText(this, "User Already Registered", Toast.LENGTH_SHORT).show()
                 } ?: run {
@@ -59,17 +50,42 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                     Toast.makeText(this, "User Inserted", Toast.LENGTH_SHORT).show()
-                    binding.editTextEmployeeId.text!!.clear()
-                    binding.editTextFullName.text!!.clear()
-                    binding.editTextPhoneNumber.text!!.clear()
-                    binding.editTextAddress.text!!.clear()
-                    binding.editTextAge.text!!.clear()
+                    clearFields()
                 }
             }
         }
 
         binding.btnShowData.setOnClickListener {
             mViewModel.getAllUsers()
+        }
+    }
+
+    private fun clearFields() {
+        binding.editTextEmployeeId.text!!.clear()
+        binding.editTextFullName.text!!.clear()
+        binding.editTextPhoneNumber.text!!.clear()
+        binding.editTextAddress.text!!.clear()
+        binding.editTextAge.text!!.clear()
+    }
+
+    private fun validateFields(): Boolean {
+        if (binding.editTextFullName.text!!.isEmpty()) {
+            Toast.makeText(this, "Enter Full Name", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (binding.editTextEmployeeId.text!!.isEmpty()) {
+            Toast.makeText(this, "Enter Employee ID", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (binding.editTextAddress.text!!.isEmpty()) {
+            Toast.makeText(this, "Enter Full Address", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (binding.editTextPhoneNumber.text!!.isEmpty()) {
+            Toast.makeText(this, "Enter Phone Number", Toast.LENGTH_SHORT).show()
+            return false
+        } else if (binding.editTextAge.text!!.isEmpty()) {
+            Toast.makeText(this, "Enter Your Age", Toast.LENGTH_SHORT).show()
+            return false
+        } else {
+            return true
         }
     }
 }
